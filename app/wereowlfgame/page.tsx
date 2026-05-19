@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useCallback, useState } from "react"
+import Link from "next/link"
 import { ArrowUp, ArrowDown, MessageCircle, Share2, Bookmark, ExternalLink, Eye, ArrowLeft, ArrowRight } from "lucide-react"
 
 const subreddits = [
@@ -256,7 +257,7 @@ export default function WereowlfGame() {
             <div className="w-8 h-8 rounded-full bg-[#FF4500] flex items-center justify-center">
               <span className="text-white font-bold text-sm">G</span>
             </div>
-            <span className="font-bold text-base text-[#1A1A2E] hidden sm:inline">r/GameGrowthNet</span>
+            <Link href="/" className="font-bold text-base text-[#1A1A2E] hidden sm:inline hover:text-[#FF4500] transition-colors">masterbuild/werewolf</Link>
           </div>
           <div className="flex items-center gap-2 text-sm text-stone-400">
             <Eye className="w-4 h-4" />
@@ -290,7 +291,7 @@ export default function WereowlfGame() {
                 {/* Content */}
                 <div className="flex-grow p-6 sm:p-8 pt-4">
                   <div className="flex items-center gap-2 text-sm text-stone-400 mb-3">
-                    <span className="font-bold text-[#FF4500]">r/GameGrowthNet</span>
+                    <span className="font-bold text-[#FF4500]">masterbuild/werewolf</span>
                     <span>·</span>
                     <span>Posted by u/strategy_dev</span>
                     <span>·</span>
