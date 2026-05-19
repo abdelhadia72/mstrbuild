@@ -16,9 +16,10 @@ function calc() {
 }
 
 export default function Countdown() {
-  const [time, setTime] = useState(calc());
+  const [time, setTime] = useState<ReturnType<typeof calc> | null>(null);
 
   useEffect(() => {
+    setTime(calc());
     const id = setInterval(() => setTime(calc()), 1000);
     return () => clearInterval(id);
   }, []);
@@ -27,7 +28,9 @@ export default function Countdown() {
     <div className="flex items-center gap-3 text-[#86868b]">
       <span className="text-sm">Launching in</span>
       <span className="font-mono tabular-nums text-[#f5f5f7]">
-        {time.days}d {time.hours}h {time.minutes}m {time.seconds}s
+        {time
+          ? `${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s`
+          : "..."}
       </span>
     </div>
   );
