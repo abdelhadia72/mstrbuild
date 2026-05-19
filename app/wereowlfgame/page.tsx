@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useCallback, useState } from "react"
 import Link from "next/link"
-import { ArrowUp, ArrowDown, MessageCircle, Share2, Bookmark, ExternalLink, Eye, ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowUp, ArrowDown, MessageCircle, Share2, Bookmark, ExternalLink, Eye, ArrowLeft, ArrowRight, Lock } from "lucide-react"
 
 const subreddits = [
   { name: "r/playmygame", members: 120000, fit: "Perfect", strictness: "Moderate", tier: 1, action: "Priority Post", details: "Requires custom 'Make a Post' button. Post Thursday 9AM EST. Angle: Open playtest, free, no P2W, seeking AI feedback." },
@@ -31,6 +31,9 @@ const timelinePlan = [
 ]
 
 export default function WereowlfGame() {
+  const [unlocked, setUnlocked] = useState(false)
+  const [passInput, setPassInput] = useState("")
+  const [passError, setPassError] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [filterTier, setFilterTier] = useState("all")
   const chartRef = useRef<any>(null)
@@ -267,6 +270,59 @@ export default function WereowlfGame() {
       </div>
 
       <div className="min-h-screen flex flex-col relative pb-24">
+
+        {!unlocked && (
+          <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center px-6" style={{ backgroundColor: "#000" }}>
+            <div className="w-full max-w-[320px] text-center">
+              <Lock className="w-10 h-10 text-white/60 mx-auto mb-8" />
+              <h1 className="text-2xl font-semibold text-white mb-1 tracking-tight">Restricted Access</h1>
+              <p className="text-sm text-white/40 mb-10">Enter the passcode to continue.</p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  if (passInput === "7837") {
+                    setUnlocked(true)
+                    setPassError(false)
+                  } else {
+                    setPassError(true)
+                  }
+                }}
+                className="space-y-5"
+              >
+                <div>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={4}
+                    value={passInput}
+                    onChange={(e) => {
+                      setPassInput(e.target.value)
+                      setPassError(false)
+                    }}
+                    placeholder="Passcode"
+                    className={`w-full px-5 py-4 text-center text-base font-normal rounded-2xl border outline-none transition-all ${
+                      passError
+                        ? "border-red-500/50 bg-red-500/10 text-red-400 placeholder:text-red-400/30"
+                        : "border-white/[0.12] bg-white/[0.06] text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.08]"
+                    }`}
+                    autoFocus
+                  />
+                  {passError && (
+                    <p className="text-red-400 text-sm mt-3 text-center font-medium">Incorrect passcode. Try again.</p>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-full bg-[#007AFF] hover:bg-[#0066D6] text-white font-semibold text-sm transition-all active:scale-[0.97]"
+                >
+                  Unlock
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+
         <main className="flex-grow flex items-center justify-center w-full max-w-6xl mx-auto px-6 sm:px-10 pt-8">
 
           {/* Arrows */}
