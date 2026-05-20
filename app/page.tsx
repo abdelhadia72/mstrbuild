@@ -43,6 +43,7 @@ export default function Home() {
         </p>
       </div>
 
+      {/* HIDDEN: app icons marquee row — kept for future use
       <div className="w-full max-w-3xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div
           className="flex w-max"
@@ -54,6 +55,7 @@ export default function Home() {
           <MarqueeRow />
         </div>
       </div>
+      */}
     </main>
   );
 }
