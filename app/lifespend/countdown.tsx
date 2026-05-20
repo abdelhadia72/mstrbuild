@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const TARGET = new Date("2026-05-22T00:00:00").getTime();
+const TARGET = new Date("2026-05-23T00:00:00").getTime();
 
 function calc() {
   const now = Date.now();
@@ -27,7 +27,7 @@ export default function Countdown() {
   return (
     <div className="flex items-center gap-3 text-[#86868b]">
       <span className="text-sm">Launching in</span>
-      <span className="font-mono tabular-nums text-[#f5f5f7]">
+      <span className="tabular-nums text-[#f5f5f7]">
         {time
           ? `${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s`
           : "..."}
